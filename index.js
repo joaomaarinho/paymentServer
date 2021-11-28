@@ -7,7 +7,7 @@ const app = express();
 const port = 3005;
 
 app.use(express.json());
-app.use(cors({ origin: true }));
+app.use(cors({ origin: "*" }));
 
 app.get('/', (req, res) => res.send('Hello World'));
 
@@ -15,4 +15,4 @@ app.get('/pagamento/:pagamento_id', stripeService.retriveCheckoutSession)
 
 app.post('/create-checkout-session', stripeService.createCheckoutSession);
 
-app.listen(port, () => console.log("Server listening on port ", port));
+app.listen(process.env.PORT || port, () => console.log("Server running"));
